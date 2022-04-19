@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from blog.models import *
+from blog.forms import *
 
 # CVB
 
@@ -14,3 +16,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+def inicio(request):
+    return render(request, 'blog/inicio.html', {"title": "Inicio", "message": "¡Bienvenidx!"})
+class PostsList(ListView):
+
+    model = Posts
+    template_name = "blog/posts_list.html"

@@ -7,7 +7,7 @@ class Posts(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=40)
     subtitle = models.CharField(max_length=40)
-    body = models.TextField()
+    body = models.CharField(max_length=1000)
     author = models.CharField(max_length=40)
     date = models.DateField(default=datetime.now)
     image = models.ImageField(upload_to='pictures', null=True, blank=True)
