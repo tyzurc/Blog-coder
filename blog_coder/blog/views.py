@@ -19,7 +19,31 @@ from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, 'blog/inicio.html', {"title": "Inicio", "message": "¡Bienvenidx!"})
+
 class PostsList(ListView):
 
     model = Posts
     template_name = "blog/posts_list.html"
+
+class PostDetail(DetailView):
+
+    model = Posts
+    template_name = "blog/posts_detail.html"
+
+class PostCreate(CreateView):
+
+    model = Posts
+    success_url = "/pages/"
+    fields = ['title', 'subtitle', 'body', 'author', 'date', 'image']
+
+class PostUpdate(UpdateView):
+
+    model = Posts
+    success_url = "/pages/"
+    fields = ['title', 'subtitle', 'body']
+
+class PostDelete(DeleteView):
+
+    model = Posts
+    success_url = "/pages/"
+    
