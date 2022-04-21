@@ -17,8 +17,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def inicio(request):
-    return render(request, 'blog/inicio.html', {"title": "Inicio", "message": "¡Bienvenidx!"})
+def home(request):
+    return render(request, 'blog/home.html', {"title": "Home", "message": "¡Bienvenidx!"})
 
 class PostsList(ListView):
 

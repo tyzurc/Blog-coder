@@ -7,20 +7,18 @@
     <title>Detalle</title>
 </head>
 <body>
-    
     <h1>{{posts.title}}</h1>
         <h2>{{posts.subtitle}}</h2>
 
-        <p>{{posts.author}}</p>
-        <p>{{posts.date}}</p>
+            <p>{{posts.author}}</p>
+            <p>{{posts.date}}</p>
         
-        <body>
+        <div class="container mt-5">
             <p>{{posts.body}}</p>
-        </body>
-            
-            <p>
-                <a href="{% url 'Posts' %}">Regresar</a>
-            </p>
+        </div>
 
+    <div class="container mt-5">
+        <a class="navbar-brand" href="{% url 'Posts' %}">Regresar</a>
+    </div>
 </body>
 </html>

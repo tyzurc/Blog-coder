@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block main_content %}
+<div class="container">
+    <h1 class="text-center mt-4">Logout</h1>
+    <p>
+        Se ha cerrado su sesión.
+    </p>
+    <p>
+        <a class="navbar-brand" href="{% url 'Home' %}">Volver al inicio</a>
+    </p>
+
+</div>
+
+{% endblock main_content %}
