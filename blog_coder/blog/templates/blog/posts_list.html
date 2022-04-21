@@ -13,14 +13,20 @@
         {% for posts in object_list %}
             <li>
                 <p>{{posts.title}}</p>
-                    <a href="{%url 'Detail' posts.id%}">Detalle</a>
+                    <a href="{%url 'Detail' posts.id%}">Leer más</a>
                     <a href="{%url 'Update' posts.id%}">Actualizar</a>
                     <a href="{%url 'Delete' posts.id%}">Borrar</a>
             </li>
         {% endfor %}
     </ul>
     
-    <a class="navbar-brand" href="{% url 'Inicio' %}">Volver al inicio</a>
+    <div class="container mt-5">
+        <a class="navbar-brand" href="{% url 'Create' %}">Nuevo post</a>
+    </div>
+
+    <div class="container mt-5">
+        <a class="navbar-brand" href="{% url 'Inicio' %}">Volver al inicio</a>
+    </div>
 
 </body>
 </html>
