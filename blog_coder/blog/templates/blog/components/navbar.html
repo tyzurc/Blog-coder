@@ -1,18 +1,21 @@
-<nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'Home' %}">Inicio</a>
-        <a class="navbar-brand" href="{% url 'Posts' %}">Posts</a>
-        
-        {% if not request.user.is_authenticated %}
-            
-            <a class="btn btn-primary" href="{% url 'register' %}">Regístrate</a>
-            <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesión</a>
-            
-        {% else %}
-            <a class="text-muted mb-4 mb-lg-0">{{request.user.username}}</a>
-            <img src="{{image_url}}" alt="Imagen" width="4%">
-            <a class="btn btn-primary" href="{% url 'logout' %}">Cerrar sesión</a>   
-        {% endif %}
-
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mx-auto py-0 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Home' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Posts' %}">Posts</a></li>
+            {% if not request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Regístrate</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar sesión</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" >{{request.user.username}}</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% endif %}
+            </ul>
+        </div> 
     </div>
 </nav>
