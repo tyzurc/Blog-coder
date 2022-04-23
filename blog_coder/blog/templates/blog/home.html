@@ -2,9 +2,4 @@
 
 {% block main_content %}
 
-    {% if not request.user.is_authenticated %}
-        <a class="btn btn-primary">Registrate ahora</a>
-        <a class="btn btn-primary" href="{% url 'register' %}">acá</a>
-    {% endif %}
-
 {% endblock main_content %}

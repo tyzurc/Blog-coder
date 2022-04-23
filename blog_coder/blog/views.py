@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from blog.models import *
+from accounts.models import Avatar
 from blog.forms import *
 
 # CVB
@@ -18,6 +19,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
+
+    if request.user.is_authenticated:
+        avatar = Avatar.objects.filter(user=request.user)
+
+        if len(avatar) > 0:
+            imagen = avatar[0].imagen.url
+        return render(request, 'blog/home.html', {"title": "Home", "message": "¡Bienvenidx!", "image_url": imagen})
+    
     return render(request, 'blog/home.html', {"title": "Home", "message": "¡Bienvenidx!"})
 
 class PostsList(ListView):
