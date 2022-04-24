@@ -24,6 +24,9 @@ def home(request):
     """
     return render(request, 'blog/home.html', {"title": "Home", "message": "¡Bienvenidx!"})
 
+def about(request):
+
+    return render(request, 'blog/about.html', {"title": "Acerca de mí"})
 class PostsList(ListView):
 
     model = Posts
