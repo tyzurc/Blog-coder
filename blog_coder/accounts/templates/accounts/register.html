@@ -1,12 +1,33 @@
 {% extends 'blog/base.html' %}
 
+{% load widget_tweaks %}
+
 {% block main_content %}
 
-<div class="container mt-5 text-center">
+<div class="container mt-5">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Registrarse" class="btn btn-primary">
+
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-control' }}
+            {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <div class="container mt-5">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok"></span>Registrarse
+            </button>
+            <a href="{% url 'Home' %}" class="btn btn-default">Cancelar</a>
+        </div>
     </form>
 </div>
 

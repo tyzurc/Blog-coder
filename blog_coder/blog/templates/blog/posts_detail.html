@@ -1,24 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle</title>
-</head>
-<body>
-    <h1>{{posts.title}}</h1>
-        <h2>{{posts.subtitle}}</h2>
+{% extends 'blog/base.html' %}
 
-            <p>{{posts.author}}</p>
-            <p>{{posts.date}}</p>
-        
-        <div class="container mt-5">
-            <p>{{posts.body}}</p>
+{% block header %}
+
+{% load static %}
+
+<header class="masthead" style="background-image: url({% static 'blog/assets/img/post-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{posts.title}}</h1>
+                    <h2 class="subheading">{{posts.subtitle}}</h2>
+                    <span class="meta">
+                        Posteado por {{posts.author}} el {{posts.date}}
+                    </span>
+                </div>
+            </div>
         </div>
-
-    <div class="container mt-5">
-        <a href="{% url 'Posts' %}">Regresar</a>
     </div>
-</body>
-</html>
+</header>
+
+{% endblock header %}
+
+{% block main_content %}
+
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>{{posts.body}}</p>
+                {% if request.user.is_authenticated %}
+                <a href="{%url 'Update' posts.id%}" class="btn btn-success">Editar</a>
+                <a href="{%url 'Delete' posts.id%}" class="btn btn-danger">Borrar</a>
+                {% endif %}
+            </div>
+            <a href="{% url 'Posts' %}" class="btn btn-link">Regresar</a>
+        </div>
+    </div>
+</article>
+
+{% endblock main_content %}

@@ -52,13 +52,14 @@ def login_request(request):
                 
                 if len(avatar) > 0:
                     imagen = avatar[0].imagen.url
-                return render(request, 'blog/home.html', {"title": "Home", "message": f"¡Bienvenidx {user}!", "image_url": imagen})
-            
+                # Tira error si el user no tiene avatar todavía
+                # return render(request, 'blog/home.html', {"title": "Home", "message": f"¡Bienvenidx {user}!", "image_url": imagen})
+                return render(request, 'blog/home.html', {"title": "Home", "message": f"¡Bienvenidx {user}!"})
             else:
                 return render(request, 'blog/home.html', {"title": "Home", "message": "Error", "errors": [f"El usuario {user} no existe"]})
         
         else:
-            return render(request, 'blog/home.html', {"title": "Home", "message": "Anonymous", "errors": ["Revise los datos indicados en el form"]})
+            return render(request, 'blog/home.html', {"title": "Home", "message": "Anonymous", "errors": ["Revise los datos indicados"]})
 
     else:
         form = AuthenticationForm()
@@ -91,7 +92,7 @@ def update_user(request):
 """ class ProfileDetail(LoginRequiredMixin, DetailView):
 
     model = 
-    template_name = "accounts/profile_detail.html"
+    template_name = 
  """
 @login_required()
 def upload_avatar(request):
