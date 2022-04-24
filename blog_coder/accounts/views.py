@@ -48,12 +48,6 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                avatar = Avatar.objects.filter(user=request.user)
-                
-                if len(avatar) > 0:
-                    imagen = avatar[0].imagen.url
-                # Tira error si el user no tiene avatar todavía
-                # return render(request, 'blog/home.html', {"title": "Home", "message": f"¡Bienvenidx {user}!", "image_url": imagen})
                 return render(request, 'blog/home.html', {"title": "Home", "message": f"¡Bienvenidx {user}!"})
             else:
                 return render(request, 'blog/home.html', {"title": "Home", "message": "Error", "errors": [f"El usuario {user} no existe"]})
@@ -89,34 +83,7 @@ def update_user(request):
         form = UserEditForm(initial={"email":user.email})
         return render(request, 'accounts/update_user.html', {"title": "Editar usuario", "message": "Editar usuario", "form": form})
 
-""" class ProfileDetail(LoginRequiredMixin, DetailView):
-
-    model = 
-    template_name = 
- """
 @login_required()
-def upload_avatar(request):
+def profile(request):
 
-    if request.method == "POST":
-
-        formulario = AvatarForm(request.POST,request.FILES)
-
-        if formulario.is_valid():
-
-            usuario = request.user
-            avatar = Avatar.objects.filter(user=usuario)
-
-            if len(avatar) > 0:
-                avatar = avatar[0]
-                avatar.imagen = formulario.cleaned_data["imagen"]
-                avatar.save()
-            else:
-                avatar = Avatar(user=usuario, imagen=formulario.cleaned_data["imagen"])
-                avatar.save()
-
-        return redirect("Home")
-
-    else:
-        formulario = AvatarForm()
-        return render(request, "accounts/upload_avatar.html", {"title": "Cargar avatar", "message": "Cargar avatar", "form": formulario})
-
+    return render (request, 'accounts/profile.html')
