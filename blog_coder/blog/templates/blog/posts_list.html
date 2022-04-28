@@ -24,8 +24,9 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="container mt-5">
-
-            {% for posts in object_list %}
+                {% if object_list %}
+                
+                {% for posts in object_list %}
                 <div class="post-preview">
                     <a href="{%url 'Detail' posts.id%}">
                         <h2 class="post-title">{{posts.title}}</h2>
@@ -34,19 +35,43 @@
                     <p class="post-meta">Posteado por {{posts.author}} el {{posts.date}}</p>
                     <a href="{%url 'Detail' posts.id%}">Leer más</a>
                 </div>
-            {% endfor %}
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="container mt-5">
-                    {% if request.user.is_authenticated %}
-                    <a href="{% url 'Create' %}" class="btn btn-success">Nuevo post</a>
-                    <a href="{% url 'Home' %}" class="btn btn-link">Volver al inicio</a>
-                    {% else %}
-                    <a href="{% url 'Home' %}" class="btn btn-link">Volver al inicio</a>
-                    {% endif %}
+                {% endfor %}
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="container mt-5">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'Create' %}" class="btn btn-success">Nuevo post</a>
+                        <p><a href="{% url 'Home' %}">Volver al inicio</a></p>
+                        {% else %}
+                        <p>
+                            Para crear un post,
+                            <a href="{% url 'login' %}">inicia sesión</a>
+                        </p>
+                        <p><a href="{% url 'Home' %}">Volver al inicio</a></p>
+                        {% endif %}
+                    </div>
                 </div>
+
+                {% else %}
+
+                        <h2>No existen posts aún</h2>
+                        {% if request.user.is_authenticated %} 
+                        <p><a href="{% url 'Create' %}">Agregar un post</a></p>
+                        <p><a href="{% url 'Home' %}">Volver al inicio</a></p>
+                        {% else %}
+                        <p>
+                            Para crear un post,
+                            <a href="{% url 'login' %}">inicia sesión</a>
+                        </p>
+                        <p><a href="{% url 'Home' %}">Volver al inicio</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% endif %}
+
             </div>
         </div>
     </div>
 </div>
-
+ 
 {% endblock main_content %}
