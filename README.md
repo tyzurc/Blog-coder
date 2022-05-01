@@ -13,3 +13,7 @@ Creado por Tyler Cruz.
 Una vez inicializada la aplicación, tendrás disponible para visitar la url de [Inicio](http://127.0.0.1:8000/) y navegar dentro de las distintas páginas disponibles actualmente.
 
 Para detener la aplicación, utilizar CTRL+C.
+
+## Vídeo de prueba
+
+Cick [acá](https://youtu.be/I5XTrz-JZSU) para ver una desmotración de la página en funcionamiento 
