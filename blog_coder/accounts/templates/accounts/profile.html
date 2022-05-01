@@ -10,6 +10,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Perfil de {{request.user.username}}</h1>
+                    <img src="{{image_url}}" alt="Imagen" width="25%">
                 </div>
             </div>
         </div>
@@ -19,5 +20,15 @@
 {% endblock header %}
 
 {% block main_content %}
+
+<div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="container mt-5">
+            {% if request.user.is_superuser %}
+            <a href="{% url 'upload_avatar' %}" >Cargar avatar</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock main_content %}

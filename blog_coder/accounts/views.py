@@ -86,4 +86,39 @@ def update_user(request):
 @login_required()
 def profile(request):
 
+    avatar = Avatar.objects.filter(user=request.user)
+
+    if len(avatar) > 0:
+        imagen = avatar[0].imagen.url
+        return render(request, 'accounts/profile.html', {"image_url": imagen})
+
     return render (request, 'accounts/profile.html')
+
+@login_required()
+def upload_avatar(request):   
+    
+    
+    if request.method == "POST":
+
+        formulario = AvatarForm(request.POST,request.FILES)
+
+        if formulario.is_valid():
+
+            usuario = request.user
+
+            avatar = Avatar.objects.filter(user=usuario)
+
+            if len(avatar) > 0:
+                avatar = avatar[0]
+                avatar.imagen = formulario.cleaned_data["imagen"]
+                avatar.save()
+
+            else:
+                avatar = Avatar(user=usuario, imagen=formulario.cleaned_data["imagen"])
+                avatar.save()
+            
+        return redirect("Home")
+    else:
+
+        formulario = AvatarForm()
+        return render(request, "accounts/upload_avatar.html", {"title": "Cargar avatar", "message": "Cargar avatar","form": formulario})

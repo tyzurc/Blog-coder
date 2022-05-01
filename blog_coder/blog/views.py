@@ -12,7 +12,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def home(request):
     
-    return render(request, 'blog/home.html', {"title": "Home", "message": "Título del blog"})
+    posts = Posts.objects.all()
+
+    return render(request, 'blog/home.html', {"title": "Home", "message": "Título del blog", "posts": posts})
 
 def about(request):
 
